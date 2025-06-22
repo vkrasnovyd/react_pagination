@@ -19,9 +19,9 @@ export function getPageItems(
   const maxPages = Math.ceil(itemsList.length / perPage);
   const firstElementId = (pageNumber - 1) * perPage;
   const lastElementId =
-    pageNumber < maxPages ? firstElementId + perPage - 1 : itemsList.length;
+    pageNumber < maxPages ? firstElementId + perPage : itemsList.length;
 
-  return [...itemsList].slice(firstElementId, lastElementId + 1);
+  return [...itemsList].slice(firstElementId, lastElementId);
 }
 
 export const usePaginationParams = (itemsCount: number) => {
