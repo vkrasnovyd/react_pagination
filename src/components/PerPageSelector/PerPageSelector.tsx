@@ -4,7 +4,7 @@ interface Props {
   itemsList: string[];
   perPage: number;
   setPerPage: (newValue: PerPage) => void;
-  setMaxPages: (newValue: number) => void;
+  setMaxPagesCount: (newValue: number) => void;
   setPageNumber: (newValue: number) => void;
 }
 
@@ -12,7 +12,7 @@ export const PerPageSelector = ({
   itemsList,
   perPage,
   setPerPage,
-  setMaxPages,
+  setMaxPagesCount,
   setPageNumber,
 }: Props) => (
   <div className="form-group row">
@@ -27,7 +27,9 @@ export const PerPageSelector = ({
             +e.target.value as PerPage;
 
           setPerPage(newPerPageValue(event));
-          setMaxPages(Math.ceil(itemsList.length / newPerPageValue(event)));
+          setMaxPagesCount(
+            Math.ceil(itemsList.length / newPerPageValue(event)),
+          );
           setPageNumber(1);
         }}
       >

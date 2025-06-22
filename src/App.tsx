@@ -30,7 +30,7 @@ export const App: React.FC = () => {
         itemsList={items}
         perPage={perPage}
         setPerPage={setPerPage}
-        setMaxPages={setMaxPagesCount}
+        setMaxPagesCount={setMaxPagesCount}
         setPageNumber={setPageNumber}
       />
       <Pagination
