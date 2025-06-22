@@ -48,57 +48,66 @@ const Pagination = ({
   pageNumber,
   maxPagesCount,
   onClick,
-}: PaginationProps) => (
-  <ul className="pagination">
-    <li
-      className={classNames('page-item', {
-        disabled: pageNumber === 1,
-      })}
-    >
-      <a
-        data-cy="prevLink"
-        className="page-link"
-        href="#prev"
-        aria-disabled={pageNumber === 1}
-        onClick={() => {
-          onClick(pageNumber - 1);
-        }}
-      >
-        «
-      </a>
-    </li>
-    {getNumbers(1, maxPagesCount).map(n => (
+}: PaginationProps) => {
+  const isFirstPage = pageNumber === 1;
+  const isLastPage = pageNumber === maxPagesCount;
+
+  return (
+    <ul className="pagination">
       <li
-        className={classNames('page-item', { active: n === pageNumber })}
-        key={`page_${n}`}
-        onClick={() => {
-          onClick(n);
-        }}
+        className={classNames('page-item', {
+          disabled: isFirstPage,
+        })}
       >
-        <a data-cy="pageLink" className="page-link" href={`#${n}`}>
-          {n}
+        <a
+          data-cy="prevLink"
+          className="page-link"
+          href="#prev"
+          aria-disabled={isFirstPage}
+          onClick={() => {
+            if (!isFirstPage) {
+              onClick(pageNumber - 1);
+            }
+          }}
+        >
+          «
         </a>
       </li>
-    ))}
-    <li
-      className={classNames('page-item', {
-        disabled: pageNumber === maxPagesCount,
-      })}
-    >
-      <a
-        data-cy="nextLink"
-        className="page-link"
-        href="#next"
-        aria-disabled={pageNumber === maxPagesCount}
-        onClick={() => {
-          onClick(pageNumber + 1);
-        }}
+      {getNumbers(1, maxPagesCount).map(n => (
+        <li
+          className={classNames('page-item', { active: n === pageNumber })}
+          key={`page_${n}`}
+          onClick={() => {
+            onClick(n);
+          }}
+        >
+          <a data-cy="pageLink" className="page-link" href={`#${n}`}>
+            {n}
+          </a>
+        </li>
+      ))}
+      <li
+        className={classNames('page-item', {
+          disabled: isLastPage,
+        })}
       >
-        »
-      </a>
-    </li>
-  </ul>
-);
+        <a
+          data-cy="nextLink"
+          className="page-link"
+          href="#next"
+          aria-disabled={isLastPage}
+          onClick={() => {
+            if (!isLastPage) {
+              onClick(pageNumber + 1);
+            }
+          }}
+        >
+          »
+        </a>
+      </li>
+    </ul>
+  );
+};
 
 const Info = ({ itemsList, perPage, pageNumber }: PageItemsInfoProps) => {
   const maxPages = Math.ceil(itemsList.length / perPage);
