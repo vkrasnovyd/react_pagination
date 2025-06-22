@@ -20,6 +20,7 @@ export const PerPageSelector = ({
       <select
         data-cy="perPageSelector"
         id="perPageSelector"
+        value={perPage}
         className="form-control"
         onChange={event => {
           const newPerPageValue = (e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -32,7 +33,7 @@ export const PerPageSelector = ({
       >
         {perPageOptions.map((option: PerPage) => {
           return (
-            <option value={option} key={option} selected={option === perPage}>
+            <option value={option} key={option}>
               {option}
             </option>
           );
