@@ -3,17 +3,17 @@ import { PerPage, perPageOptions } from '../../types/PerPage';
 interface Props {
   itemsList: string[];
   perPage: number;
-  perPageSetter: (newValue: PerPage) => void;
-  maxPagesSetter: (newValue: number) => void;
-  pageNumberSetter: (newValue: number) => void;
+  setPerPage: (newValue: PerPage) => void;
+  setMaxPages: (newValue: number) => void;
+  setPageNumber: (newValue: number) => void;
 }
 
 export const PerPageSelector = ({
   itemsList,
   perPage,
-  perPageSetter,
-  maxPagesSetter,
-  pageNumberSetter,
+  setPerPage,
+  setMaxPages,
+  setPageNumber,
 }: Props) => (
   <div className="form-group row">
     <div className="col-3 col-sm-2 col-xl-1">
@@ -25,9 +25,9 @@ export const PerPageSelector = ({
           const newPerPageValue = (e: React.ChangeEvent<HTMLSelectElement>) =>
             +e.target.value as PerPage;
 
-          perPageSetter(newPerPageValue(event));
-          maxPagesSetter(Math.ceil(itemsList.length / newPerPageValue(event)));
-          pageNumberSetter(1);
+          setPerPage(newPerPageValue(event));
+          setMaxPages(Math.ceil(itemsList.length / newPerPageValue(event)));
+          setPageNumber(1);
         }}
       >
         {perPageOptions.map((option: PerPage) => {

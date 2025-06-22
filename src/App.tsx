@@ -29,9 +29,9 @@ export const App: React.FC = () => {
       <PerPageSelector
         itemsList={items}
         perPage={perPage}
-        perPageSetter={setPerPage}
-        maxPagesSetter={setMaxPagesCount}
-        pageNumberSetter={setPageNumber}
+        setPerPage={setPerPage}
+        setMaxPages={setMaxPagesCount}
+        setPageNumber={setPageNumber}
       />
       <Pagination
         pageNumber={pageNumber}
